@@ -1,0 +1,36 @@
+<?php
+
+ $title = 'My vehicules';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <p>
+     <a href="<?php echo $this->url('vehicule', array('action'=>'add'));?>">Add new vehicule</a>
+ </p>
+
+ <table class="table">
+ <tr>
+     <th>Marque</th>
+     <th>Mod&egrave;le</th>
+     <th>Type</th>
+     <th>&nbsp;</th>
+	 <th>&nbsp;</th>
+ </tr>
+ <?php foreach ($vehicules as $vehicule) : ?>
+ <tr>
+     <td><?php echo $this->escapeHtml($vehicule->brand);?></td>
+     <td><?php echo $this->escapeHtml($vehicule->model);?></td>
+	 <td><?php echo $this->escapeHtml($vehicule->type);?></td>
+	 <td>
+         <a href="<?php echo $this->url('vehicule',
+             array('action'=>'detail', 'id' => $vehicule->id));?>">D&eacute;tail</a>
+     </td>
+     <td>
+         <a href="<?php echo $this->url('vehicule',
+             array('action'=>'edit', 'id' => $vehicule->id));?>">Edit</a>
+         <a href="<?php echo $this->url('vehicule',
+             array('action'=>'delete', 'id' => $vehicule->id));?>">Delete</a>
+     </td>
+ </tr>
+ <?php endforeach; ?>
+ </table>

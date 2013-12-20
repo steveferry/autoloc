@@ -1,0 +1,27 @@
+ <?php
+ $url = $this->url('vehicule', array(
+     'action' => 'detail',
+     'id'     => $this->id,
+ ));
+ ?>
+<?php
+ $title = 'Details du vehicule';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <table>
+ <?php
+ echo '<tr>
+			<td><b>Marque</b></td>
+			<td>'.$vehicule->brand.'</td>
+	   </tr>';
+ echo '<tr>
+			<td><b>Modele</b></td>
+			<td>'.$vehicule->model.'</td>
+	   </tr>';
+ echo '<tr>
+			<td><b>Type</b></td>
+			<td>'.$vehicule->type.'</td>
+	   </tr>';
+ ?>
+ </table>

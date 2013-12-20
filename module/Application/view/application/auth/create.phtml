@@ -1,0 +1,25 @@
+<div class="slides"><section>
+<?php
+// module/Album/view/album/album/add.phtml:
+
+$title = 'Creation d\'utilisateur';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($this->translate($title)); ?></h1>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('auth', array('action' => 'create')));
+$form->prepare();
+
+echo '<fieldset>';
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id'));
+echo $this->formRow($form->get('completename'));
+echo $this->formRow($form->get('username'));
+echo $this->formRow($form->get('password'));
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag(); ?>
+
+</fieldset>
+
+</div></section>

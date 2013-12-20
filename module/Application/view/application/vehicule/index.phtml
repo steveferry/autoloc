@@ -1,0 +1,66 @@
+<?php
+
+ $title = 'Vehicules disponibles';
+ $this->headTitle($title);
+ 
+ $auth = new \Zend\Authentication\AuthenticationService();
+ $admin = false;
+if ($auth->hasIdentity()) {
+	$identity = $auth->getIdentity();
+	if(isset($identity))
+	{
+		if($identity->right == 1){
+			$admin = true;
+		}
+	}
+}
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <table class="table">
+ <tr>
+     <th>Marque</th>
+     <th>Mod&egrave;le</th>
+     <th>Type</th>
+     <th>&nbsp;</th>
+	 <th>&nbsp;</th>
+ </tr>
+ <?php foreach ($vehicules as $vehicule) : ?>
+ <tr>
+     <td><?php echo $this->escapeHtml($vehicule->brand);?></td>
+     <td><?php echo $this->escapeHtml($vehicule->model);?></td>
+	 <td><?php echo $this->escapeHtml($vehicule->type);?></td>
+	 <td>
+         <a href="<?php echo $this->url('vehicule',
+             array('action'=>'detail', 'id' => $vehicule->id));?>">D&eacute;tail <span class="glyphicon glyphicon-search"></span></a>
+     </td>
+	<?php
+	if($admin)
+	{
+	?>
+     <td>
+         <a href="<?php echo $this->url('vehicule',
+             array('action'=>'edit', 'id' => $vehicule->id));?>">Edit <span class="glyphicon glyphicon-edit"></span></a>
+         <a href="<?php echo $this->url('vehicule',
+             array('action'=>'delete', 'id' => $vehicule->id));?>">Delete <span class="glyphicon glyphicon-remove-circle"></span></a>
+     </td>
+	<?php
+	}
+	else
+	{?>
+		<td>
+		</td>
+	<?php
+	}
+	?>
+ </tr>
+ <?php endforeach; ?>
+ </table>
+  <p><?php
+	if($admin)
+	{
+  ?>
+	 <a class="btn btn-primary btn-lg" role="button" href="<?php echo $this->url('vehicule', array('action'=>'add'));?>"><span class="glyphicon glyphicon-plus"></span> Ajouter un vehicule</a>
+	<?php
+	}
+	?>
+ </p>

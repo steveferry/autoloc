@@ -1,0 +1,29 @@
+<?php
+// module/Album/view/album/album/index.phtml:
+
+$title = 'Mes locations';
+$this->headTitle($title);
+$sm = $this->getHelperPluginManager()->getServiceLocator();
+$vehiculeTable = $sm->get('Application\Model\VehiculeTable');
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<table class="table">
+<tr>
+	<th>Numero</th>
+	<th>Vehicule</th>
+    <th>Date debut</th>
+    <th>Date fin</th>
+</tr>
+<?php foreach ($rents as $rent) : 
+$vehicule = $vehiculeTable->getVehicule($rent->vehicleId);
+?>
+<tr>
+    <td><?php echo $this->escapeHtml($rent->id);?></td>
+	<td><a href="<?php echo $this->url('vehicule',
+             array('action'=>'detail', 'id' => $vehicule->id));?>"><?php echo $vehicule->brand.' '.$vehicule->model?></a></td>
+	<td><?php echo $this->escapeHtml($rent->startDate);?></td>
+	<td><?php echo $this->escapeHtml($rent->stopDate);?></td>
+</tr>
+<?php endforeach; ?>
+</table>
